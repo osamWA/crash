@@ -1,0 +1,55 @@
+{% extends 'accounts/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-header">
+            <span class="d-flex">
+                <div class="mr-auto p-2">
+                    <form method="GET">
+                        <th>
+                            {{myfilter.form}}
+                        </th>
+
+                        <th>
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </th></div>
+                    </form>
+                    <div class="p-2"><a class="btn btn-success" href="{% url 'create_orders' %}">Create Order</a></div> 
+
+                </div>
+            </div>
+            </span>
+
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>#</th>
+                   <th>Customer</th> 
+                   <th>Product</th>
+                   <th>Date</th>
+                   <th>Status</th>
+                   <th>Note</th>
+                   <th>Update</th>
+                   <th>Delete</th>
+                </tr>
+                {% for i in TheallOrders %}
+                <tr>
+                    <th><a href="{% url 'orderHistory'  i.id %}"><h5 class="display-5">His</h5></a></th>   
+                    <th>{{i.customer}}</th> 
+                    <th>{{i.product}}</th>
+                    <th>{{i.date_created}}</th>
+                    <th>{{i.status}}</th>
+                    <th>{{i.note}}</th>
+                    <th><a class="btn btn-info" href="{% url 'update_orders'  i.id %}">Update</a></th>
+                    <th><a class="btn btn-danger" href="{% url 'delete_orders'  i.id %}">Delete</a></th>
+
+                 </tr>
+                 {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

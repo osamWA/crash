@@ -1,0 +1,21 @@
+
+body{
+    background-color:rgb(243, 242, 242);
+}
+
+#total-orders{
+    background-color: rgb(104, 170, 134);
+}
+
+#order-delivered{
+    background-color: rgba(62, 136, 197, 0.89);
+}
+
+#order-pindings{
+    background-color: rgb(201, 84, 84);
+}
+#order-progress{
+    background-color: rgb(209, 177, 72);
+}
+
+

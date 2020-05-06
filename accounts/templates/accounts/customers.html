@@ -1,0 +1,94 @@
+{% extends 'accounts/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>customers</h1>
+<hr>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-header">
+            <h5>Customers : {{customerInfo.name}}</h5>
+        </div>
+        <div class="card card-body">
+            <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'update_customer' customerInfo.id %}">Update</a>
+            <a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'delete_customer' customerInfo.id %}">Delete</a>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-header">
+            <h5>Contact Info</h5>
+        </div>
+        <div class="card card-body">
+            <p>Email : {{customerInfo.email}} </p>
+            <p>Phone : {{customerInfo.phone}} </p>
+        </div>
+    </div>
+
+    <div class="col-md">
+        <div class="card card-header">
+            <h5>Total Orders</h5>
+        </div>
+        <div class="card card-body">
+            <h1 style="text-align: center; padding:12px">{{totaltheOrders}}</h1>
+        </div>
+    </div>
+</div>
+
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+
+        <form class="form-inline my-2 my-lg-0" method="GET">
+            <div class="row">
+                <tr>
+                    <th>
+                        {{myfilter.form|crispy}}
+                    </th>
+                </tr>
+            </div>
+            <div class="col">
+            <button class="btn btn-primary" type="submit">Search</button></div>
+        </form>
+    </div>
+    </div>
+</div>
+<br>
+
+
+<div class="row">
+    <div class="col-md">
+    <div class="card card-header">
+        <h3>Orders</h3>
+    </div>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Product</th>
+                    <th>Date Ordered</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for i in theOrders %}
+                <tr>
+                    <th>{{i.product}}</th>
+                    <th>{{i.date_created}}</th>
+                    <th>{{i.status}}</th>
+                    <th><form method="POST" action="{% url 'update_orders'  i.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-warning" type="submit">Update</button>
+                    </form></th>
+                    <th><form method="POST" action="{% url 'delete_orders'  i.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-danger" type="submit">Remove</button>
+                    </form></th>
+                </tr>
+                {% endfor %}
+                </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

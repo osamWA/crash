@@ -1,0 +1,16 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+
+    <div class="card card-header">
+        <div class="card card-body">
+            <form method="POST" action="">
+                {% csrf_token%}
+                {{UpdateForm}}          
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

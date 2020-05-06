@@ -1,0 +1,49 @@
+{% extends 'accounts/main.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md">
+      <!--   <div class="card card-header">
+            <span class="d-flex">
+                <div class="mr-auto p-2">
+                    <form method="GET">
+                        <th>
+                            {{myfilter.form}}
+                        </th>
+
+                        <th>
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </th></div>
+                    </form>
+                    <div class="p-2"><a class="btn btn-success" href="{% url 'create_orders' %}">Create Order</a></div> 
+
+                </div> -->
+            </div>
+            </span>
+
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                   <th>Customer</th> 
+                   <th>Product</th>
+                   <th>Date</th>
+                   <th>Status</th>
+                   <th>Note</th>
+                </tr>
+                {% for i in theUnion %}
+                <tr>
+
+                    <th>{{i.customer}}</th> 
+                    <th>{{i.product}}</th>
+                    <th>{{i.date_created}}</th>
+                    <th>{{i.status}}</th>
+                    <th>{{i.note}}</th>
+                 </tr>
+                 {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

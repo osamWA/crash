@@ -1,0 +1,67 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<hr>
+{% include 'accounts/status.html'%}
+
+<hr>
+<div class="row">
+<div class="col-md-5">
+<h3>Customers</h3>
+<hr>
+<div class="card card-body">
+<a class="btn btn-outline-primary btn-sm btn-block" href="{% url 'create_customer' %}">create Customers</a>
+<table class="table table-sm">
+
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Orders Qut</th>
+        </tr>
+
+    {% for i in orderbycustomer%}
+    <tr>
+    <th><a class="btn btn-outline-primary" href="{% url 'customers' i.customer_id %}">view</a></a></th>
+    <th>{{ i.customer_id__name }}</th>
+    <th>{{ i.dcount }}</th>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
+
+<div class="col-md-7">
+    <h3>Last Orders</h3>
+    <hr>
+    <div class="card card-body">
+    <a class="btn btn-outline-primary btn-sm btn-block" href="{% url 'create_orders' %}">create Order</a>
+    <table class="table table-sm">
+    <tr>
+        <th>Product</th>
+        <th>Date Ordered</th>
+        <th>Status</th>
+        <th>Update</th>
+        <th>Remove</th>
+    </tr>
+    {% for i in Orders%}
+    <tr>
+        <th>{{i.customer}}</th>
+        <th>{{i.date_created}}</th>
+        <th>{{i.status}}</th>
+        <th><form method="GET" action="{% url 'update_orders' i.id %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-warning" type="submit">Update</button>
+        </form></th>
+        <th><form method="POST" action="{% url 'delete_orders' i.id %}">
+            {% csrf_token %}
+            <button class="btn btn-outline-danger" type="submit">Remove</button>
+        </form></th>
+    </tr>
+    
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+</div>
+{% endblock %}
